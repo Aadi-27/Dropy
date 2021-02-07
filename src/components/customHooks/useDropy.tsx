@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+// import { useCustomHook } from "../common/customHook";
 
-export default function Dropy() {
+export function useDropy() {
   const [dropzone, setDropzone] = useState<HTMLElement>();
   const [droparea, setDroparea] = useState<HTMLElement>();
+  const [fileArr, setFilesArr] = useState<FileList>();
+  // const filesArr = useCustomHook(e);
 
   useEffect(() => {
     const dropZone = document.getElementById("drop-zone");
@@ -21,7 +24,7 @@ export default function Dropy() {
       dropzone.style.border = "unset";
       dropzone.style.backgroundColor = "unset";
     }
-    console.log(event.dataTransfer.files);
+    setFilesArr(event.dataTransfer.files);
   };
 
   if (droparea) {
@@ -42,14 +45,6 @@ export default function Dropy() {
     droparea.ondragover = dragOverHandler;
   }
 
-  const onClick = (event: any) => {
-    console.log(`click`);
-  };
-
-  if (droparea) {
-    droparea.onclick = onClick;
-  }
-
   const handleDragLeave = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
@@ -63,5 +58,5 @@ export default function Dropy() {
   if (droparea) {
     droparea.ondragleave = handleDragLeave;
   }
-  return <div id="drop-zone" />;
+  return fileArr;
 }
