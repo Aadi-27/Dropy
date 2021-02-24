@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-// import { useCustomHook } from "../common/customHook";
 
 export function useDropy() {
-  const [dropzone, setDropzone] = useState<HTMLElement>();
-  const [droparea, setDroparea] = useState<HTMLElement>();
-  const [fileArr, setFilesArr] = useState<FileList>();
-  // const filesArr = useCustomHook(e);
+  const [dropzone, setDropzone] = useState();
+  const [droparea, setDroparea] = useState();
+  const [fileArr, setFilesArr] = useState();
 
   useEffect(() => {
     const dropZone = document.getElementById("drop-zone");
@@ -16,10 +14,10 @@ export function useDropy() {
     }
   }, []);
 
-  const dropHandler = (event: any) => {
+  const dropHandler = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    if (dropzone?.contains(event.target)) {
+    if (dropzone.contains(event.target)) {
       dropzone.style.visibility = "hidden";
       dropzone.style.border = "unset";
       dropzone.style.backgroundColor = "unset";
@@ -31,7 +29,7 @@ export function useDropy() {
     droparea.ondrop = dropHandler;
   }
 
-  const dragOverHandler = (event: any) => {
+  const dragOverHandler = (event) => {
     event.preventDefault();
     event.stopPropagation();
     if (dropzone) {
@@ -45,10 +43,10 @@ export function useDropy() {
     droparea.ondragover = dragOverHandler;
   }
 
-  const handleDragLeave = (event: any) => {
+  const handleDragLeave = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    if (dropzone?.contains(event.target)) {
+    if (dropzone.contains(event.target)) {
       dropzone.style.visibility = "hidden";
       dropzone.style.border = "unset";
       dropzone.style.backgroundColor = "unset";

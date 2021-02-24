@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-.App {
+#drop-area {
   height: 100vh;
   position: relative;
 }
